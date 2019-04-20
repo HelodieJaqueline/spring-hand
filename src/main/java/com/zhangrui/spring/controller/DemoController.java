@@ -16,15 +16,25 @@ import javax.servlet.http.HttpServletResponse;
  * @Modified: By
  */
 @MyController
-@MyRequestMapping(name = "/demo")
+@MyRequestMapping(value = "/demo")
 public class DemoController {
 
 	@MyAutowired
 	private DemoService demoService;
 
-	@MyRequestMapping(name = "/query")
+	@MyRequestMapping(value = "/query")
 	public void query(HttpServletRequest request, HttpServletResponse response,@MyRequestParam(name = "name") String name) {
-		String resp = "The name is" + name;
+		String resp = "The name is " + name;
+		try {
+			response.getWriter().write(resp);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@MyRequestMapping(value = "/insert")
+	public void insert(HttpServletRequest request, HttpServletResponse response,@MyRequestParam(name = "name") String name) {
+		String resp = "The insert is " + name;
 		try {
 			response.getWriter().write(resp);
 		} catch (Exception e) {
